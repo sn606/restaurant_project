@@ -1,0 +1,54 @@
+<div class="profile-wrapper">
+  <div class="profile-card">
+
+    <div class="profile-header">
+      <div class="profile-initials">
+        {{ profileData?.firstName?.charAt(0) }}{{ profileData?.lastName?.charAt(0) }}
+      </div>
+      <h2 *ngIf="!loading && profileData">
+        {{ profileData.firstName }} {{ profileData.lastName }}
+      </h2>
+      <p class="account-type" *ngIf="!loading && profileData">
+        {{ profileData.accountType }}
+      </p>
+      <p *ngIf="loading">Loading profile...</p>
+    </div>
+
+    <div class="profile-body" *ngIf="!loading && profileData">
+
+      <div class="section-label">Account Information</div>
+
+      <div class="info-list">
+        <div class="info-row">
+          <div class="info-icon"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <span class="info-label">Full Name</span>
+            <span class="info-value">{{ profileData.firstName }} {{ profileData.lastName }}</span>
+          </div>
+        </div>
+
+        <div class="info-row" *ngIf="profileData.email">
+          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <span class="info-label">Email Address</span>
+            <span class="info-value">{{ profileData.email }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon"><i class="fa-solid fa-shield"></i></div>
+          <div>
+            <span class="info-label">Account Type</span>
+            <span class="info-value">{{ profileData.accountType }}</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+
+    </div>
+  </div>
+</div>

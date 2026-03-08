@@ -1,0 +1,55 @@
+<section class="register-section">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="field">
+      <label>First Name</label>
+      <input
+        type="text"
+        formControlName="firstName"
+        [class.valid]="isValid('firstName')"
+        [class.invalid]="isInvalid('firstName')"
+      />
+      <p>Please enter valid Name - Start with capital</p>
+    </div>
+
+    <div class="field">
+      <label>Last Name</label>
+      <input
+        type="text"
+        formControlName="lastName"
+        [class.valid]="isValid('lastName')"
+        [class.invalid]="isInvalid('lastName')"
+      />
+      <p>Please enter valid LastName - Start with capital</p>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        [class.valid]="isValid('email')"
+        [class.invalid]="isInvalid('email')"
+      />
+      <p>Please enter valid Email</p>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        [class.valid]="isValid('password')"
+        [class.invalid]="isInvalid('password')"
+      />
+      <p>Please enter valid Password - Only digits, 5+ characters</p>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+
+    <p style="margin-top: 15px;">
+      Already have an account? <a routerLink="/login">Login here</a>
+    </p>
+  </form>
+</section>

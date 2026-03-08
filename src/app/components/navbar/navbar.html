@@ -1,0 +1,24 @@
+<header class="header">
+  <nav class="nav">
+    <div class="logo"><a routerLink="/">Restaurant</a></div>
+    <ul class="nav-links" [class.active]="isMenuOpen">
+      <li><a routerLink="/" fragment="home" (click)="isMenuOpen=false">Home</a></li>
+      <li><a routerLink="/" fragment="menu-section" (click)="isMenuOpen=false">Menu</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/register" (click)="isMenuOpen=false">Register</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login" (click)="isMenuOpen=false">Login</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/profile" (click)="isMenuOpen=false">Profile</a></li>
+      <li><a routerLink="/" fragment="googlemaps" (click)="isMenuOpen=false">Location</a></li>
+      <li class="cart">
+        <a routerLink="/cart" (click)="isMenuOpen=false">
+          <span>Cart</span>
+          <i class="fa-solid fa-cart-shopping cart-icon"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="burger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+</header>

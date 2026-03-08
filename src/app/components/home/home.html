@@ -1,0 +1,128 @@
+<!-- slider 1 -->
+<section id="home" class="home-section">
+  <img id="mainImage" [src]="currentSliderImage" alt="Restaurant" />
+  <div class="home-text">
+    <h1>Delicious Flavors</h1>
+    <p>Fresh ingredients. Warm atmosphere. Great experience.</p>
+  </div>
+  <div class="slider-controls">
+    <button (click)="prevSlide()">&lt;</button>
+    <button (click)="nextSlide()">&gt;</button>
+  </div>
+</section>
+
+<!-- categories -->
+<section id="categories-section">
+  <h2 class="section-title">Categories</h2>
+  <div class="categories-container">
+    <button
+      class="category-btn"
+      [class.active]="filters.categoryId === 'all'"
+      (click)="selectCategory('all')"
+    >All</button>
+    <button
+      *ngFor="let category of categories"
+      class="category-btn"
+      [class.active]="filters.categoryId === category.id"
+      (click)="selectCategory(category.id)"
+    >{{ category.name }}</button>
+  </div>
+</section>
+
+<!-- menu section -->
+<section id="menu-section">
+  <div class="menu-with-filters">
+
+    <!-- filters sidebar -->
+    <div class="filters-sidebar">
+      <div class="filter-panel">
+        <h3>Filter</h3>
+
+        <div class="filter-group">
+          <label>Spiciness:</label>
+          <select class="filter-select" [(ngModel)]="selectedSpiciness">
+            <option value="null">Not Chosen</option>
+            <option value="0">Not Spicy (0)</option>
+            <option value="1">🌶️ (1)</option>
+            <option value="2">🌶️🌶️ (2)</option>
+            <option value="3">🌶️🌶️🌶️ (3)</option>
+            <option value="4">🌶️🌶️🌶️🌶️ (4)</option>
+          </select>
+        </div>
+
+        <div class="filter-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="filter-checkbox" [(ngModel)]="noNuts" />
+            <span>No Nuts</span>
+          </label>
+        </div>
+
+        <div class="filter-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="filter-checkbox" [(ngModel)]="vegetarianOnly" />
+            <span>Vegetarian only</span>
+          </label>
+        </div>
+
+        <div class="filter-buttons">
+          <button type="button" class="filter-action-btn" (click)="resetFilters()">Reset</button>
+          <button type="button" class="filter-action-btn apply-btn" (click)="applyFilters()">Apply Filter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- products -->
+    <div class="products-area">
+      <div class="products-container">
+        <p class="no-products" *ngIf="displayedProducts.length === 0">
+          No products found matching your filters.
+        </p>
+        <div class="product-card" *ngFor="let product of displayedProducts">
+          <img [src]="product.image" [alt]="product.name" />
+          <h3>{{ product.name }}</h3>
+          <div class="product-details">
+            <div class="spiciness-indicator" *ngIf="product.spiciness !== undefined">
+              Spiciness: {{ product.spiciness }}
+            </div>
+            <div class="allergen-indicators">
+              <span class="allergen-tag" *ngIf="product.nuts">Nuts</span>
+              <span class="allergen-tag" *ngIf="product.vegeterian">Vegeterian</span>
+            </div>
+          </div>
+          <p class="price">$ {{ product.price }}</p>
+          <button class="btn-add" (click)="addToCart(product)">Add to cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- slider 2 -->
+<section class="gallery-slider">
+  <h1 class="gallerytext">Restaurant Gallery</h1>
+  <div class="gallery-wrapper">
+    <div
+      class="main-image"
+      [style.background-image]="'url(' + mainGalleryImage + ')'"
+    ></div>
+    <div class="thumbnails">
+      <div
+        *ngFor="let img of galleryImages; let i = index"
+        [style.background-image]="'url(' + img + ')'"
+        [class.active]="activeGalleryIndex === i"
+        (click)="showGalleryImage(i)"
+      ></div>
+    </div>
+  </div>
+</section>
+
+<!-- google maps -->
+<h1 id="googlemaps" class="map">Our Location</h1>
+<div class="googlemaps">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d650.5217850543445!2d44.73887324031122!3d41.72272817665324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x404473f1e984eb5b%3A0xc9bc4f7477b26c2e!2sIT%20Academy%20STEP%20Georgia!5e1!3m2!1sen!2sge!4v1768349356082!5m2!1sen!2sge"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>

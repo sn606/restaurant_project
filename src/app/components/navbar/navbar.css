@@ -1,0 +1,109 @@
+.header {
+  width: 100%;
+  background-color: #f4f4f4;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+  font-weight: 900;
+  color: #d35400;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #d35400;
+}
+
+.logo a:hover {
+  color: #e67e22;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d35400;
+}
+
+.cart a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+  transition: 0.3s ease;
+}
+
+.cart-icon {
+  font-size: 22px;
+  color: #222;
+  transition: 0.3s ease;
+}
+
+.cart a:hover .cart-icon {
+  color: #d35400;
+  transform: scale(1.15);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.burger span {
+  width: 24px;
+  height: 2px;
+  background-color: #222;
+  transition: 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0;
+    display: none;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+  .burger {
+    display: flex;
+  }
+}

@@ -1,0 +1,45 @@
+<main class="cart-main">
+  <h1>Your Cart</h1>
+
+  <ul class="cart-list">
+    <li class="empty-cart-message" *ngIf="cartItems.length === 0">Your cart is empty</li>
+
+    <li class="cart-item" *ngFor="let item of cartItems">
+      <div class="cart-item-product">
+        <img [src]="item.product.image" [alt]="item.product.name" />
+        <h3>{{ item.product.name }}</h3>
+      </div>
+
+      <div class="cart-item-quantity">
+        <div class="quantity-controls">
+          <button class="qty-btn" (click)="changeQty(item, item.quantity - 1)">-</button>
+          <span class="cart-item-qty">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="changeQty(item, item.quantity + 1)">+</button>
+        </div>
+      </div>
+
+      <div class="cart-item-price">
+        <span>{{ item.price.toFixed(2) }} ₾</span>
+      </div>
+
+      <div class="cart-item-total">
+        <span>{{ getItemTotal(item).toFixed(2) }} ₾</span>
+      </div>
+
+      <div class="cart-item-action">
+        <button class="remove-btn" (click)="removeItem(item)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cart-bottom-section">
+    <div class="cart-total-box">
+      <h3>
+        Total: <span>{{ totalAmount.toFixed(2) }}</span> ₾
+      </h3>
+    </div>
+    <button class="checkout-btn" (click)="checkout()">Proceed to Checkout</button>
+  </div>
+</main>
