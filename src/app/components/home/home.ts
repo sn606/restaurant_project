@@ -174,20 +174,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  addToCart(product: Product): void {
-    this.cartService.getAll().subscribe(cartItems => {
-      const existing = cartItems.find(item => item.product.id === product.id);
-      if (existing) {
-        this.cartService.updateBasket(product.id, existing.quantity + 1, product.price).subscribe(() => {
-          alert('Added to cart ✅');
-          this.cdr.detectChanges();
-        });
-      } else {
-        this.cartService.addToCart(product.id, product.price).subscribe(() => {
-          alert('Added to cart ✅');
-          this.cdr.detectChanges();
-        });
-      }
-    });
+addToCart(product: Product): void {
+  const isLoggedIn = document.cookie.includes('restaurant_token') ||
+                     document.cookie.includes('education_token');
+
+  if (!isLoggedIn) {
+    alert('Please login first to add items to cart!');
+    return;
   }
+
+  this.cartService.getAll().subscribe(cartItems => {
+    const existing = cartItems.find(item => item.product.id === product.id);
+    if (existing) {
+      this.cartService.updateBasket(product.id, existing.quantity + 1, product.price).subscribe(() => {
+        alert('Added to cart ✅');
+      });
+    } else {
+      this.cartService.addToCart(product.id, product.price).subscribe(() => {
+        alert('Added to cart ✅');
+      });
+    }
+  });
+}
 }
